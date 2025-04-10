@@ -10,23 +10,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-     
-      - name: Set up Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: 'latest'
+    - name: Set up Hugo
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: 'latest'
 
-      
-      - name: Build the website
-        run: hugo
+    - name: Build the website
+      run: hugo
 
-      
-      - name: Upload built site
-        uses: actions/upload-artifact@v3
-        with:
-          name: built-site
-          path: public/
+    - name: Upload built site
+      uses: actions/upload-artifact@v3
+      with:
+        name: built-site
+        path: public/
