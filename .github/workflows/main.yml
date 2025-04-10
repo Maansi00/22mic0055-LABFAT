@@ -1,4 +1,4 @@
-name: Test Upload Artifact
+name: Build Website
 
 on:
   push:
@@ -6,18 +6,26 @@ on:
       - '**'
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: write
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Create a dummy file
-      run: echo "Test content" > dummy-file.txt
+    - name: Set up Hugo
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: 'latest'
 
-    - name: Upload dummy file
+    - name: Build the website
+      run: hugo
+
+    - name: Upload built site
       uses: actions/upload-artifact@v3
       with:
-        name: dummy-artifact
-        path: dummy-file.txt
+        name: built-site
+        path: public/
